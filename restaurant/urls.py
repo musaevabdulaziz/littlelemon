@@ -1,14 +1,13 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import MenuItemViewSet
-from djoser import views as djoser_views 
+from django.urls import path
+from . import views
 
-
-router = DefaultRouter()
-router.register(r'menu-items', MenuItemViewSet, basename="menu-item"),
-router.register(r'users', djoser_views.UserViewSet),
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path("", include('djoser.urls.jwt')),
+    path('', views.home, name="home"),
+    path('about/', views.about, name="about"),
+    path('book/', views.book, name="book"),
+    path('reservations/', views.reservations, name="reservations"),
+    path('menu/', views.menu, name="menu"),
+    path('menu_item/<int:pk>/', views.display_menu_item, name="menu_item"),  
+    path('bookings', views.bookings, name='bookings'), 
 ]
