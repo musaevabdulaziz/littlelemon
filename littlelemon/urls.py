@@ -15,19 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView, 
-    TokenRefreshView, 
-    TokenVerifyView
-)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # re_path(r'^auth/', include('djoser.urls')),
-    # re_path(r"^auth/", include('djoser.urls.jwt')),
-    
-    path('api/token', TokenObtainPairView.as_view(), name='token-obtain-pair'),
-    path('api/token/refresh', TokenRefreshView.as_view(), name='token-refresh'),
-    path('api/token/verify', TokenVerifyView.as_view(), name='token-verify'),
+    re_path(r'^auth/', include('djoser.urls')),
+    re_path(r"^auth/", include('djoser.urls.jwt')),
     path('', include('restaurant.urls')),
 ]
